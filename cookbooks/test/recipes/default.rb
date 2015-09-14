@@ -20,13 +20,15 @@ execute "yum-update" do
   action :run
 end
 
-# yum_package 'httpd' do
-#   action :install
-# end
-#
-# service 'httpd' do
-#   action [:enable, :start]
-# end
+%w{mariadb mariadb-server}.each do |pkg|
+  yum_package pkg do
+    action :install
+  end
+end
+
+service 'mariadb' do
+  action [:enable, :start]
+end
 
 service 'firewalld' do
   action [:disable, :stop]

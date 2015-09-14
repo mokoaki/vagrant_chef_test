@@ -4,7 +4,7 @@
 - CentOS 7.0 のVMを用意（現在は第3者の用意したもの。注意）
 - rbenv のインスコ
 - Ruby のインスコ
-- MySQL のインスコ（予定）
+- MySQL(MariaDB) のインスコ
 
 先立ってローカルにインスコする必要があるもの
 - VirtualBox
