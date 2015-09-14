@@ -32,50 +32,67 @@ service 'firewalld' do
   action [:disable, :stop]
 end
 
-git "/home/vagrant/.rbenv" do
-  repository "https://github.com/sstephenson/rbenv.git"
-  revision   "master"
-  user       "vagrant"
-  group      "vagrant"
-  action     :sync
+#本当に要るのか
+group "rbenv" do
+  action :create
+  members "vagrant"
+  append true
 end
 
-directory "/home/vagrant/.rbenv/plugins" do
-  owner  "vagrant"
-  group  "vagrant"
+git '/usr/local/rbenv' do
+  repository 'https://github.com/sstephenson/rbenv.git'
+  reference 'master'
+  user 'root'
+  group 'root'
+  action :checkout
+end
+
+directory "/usr/local/rbenv/shims" do
+  owner 'root'
+  group 'root'
+  mode 00755
   action :create
 end
 
-git "/home/vagrant/.rbenv/plugins/ruby-build" do
-  repository "https://github.com/sstephenson/ruby-build.git"
-  revision   "master"
-  user       "vagrant"
-  group      "vagrant"
-  action     :sync
+directory "/usr/local/rbenv/versions" do
+  owner 'root'
+  group 'root'
+  mode 00755
+  action :create
 end
 
-template '.bash_profile' do
-  source '.bash_profile.erb'
-  path "/home/vagrant/.bash_profile"
-  mode '0644'
-  owner 'vagrant'
-  group 'vagrant'
-  not_if "grep rbenv /home/vagrant/.bash_profile"
+directory "/usr/local/rbenv/plugins" do
+  owner 'root'
+  group 'root'
+  mode 00755
+  action :create
 end
 
-# execute "source ~/.bash_profile" do
-#   user   "vagrant"
-#   cwd    "/home/vagrant"
-#   command   "source ~/.bash_profile"
-#   action :run
-# end
+template "/etc/profile.d/rbenv.sh" do
+  path "/etc/profile.d/rbenv.sh"
+  owner "root"
+  group "root"
+  mode "0644"
+  source "rbenv.sh.erb"
+end
+
+git '/usr/local/rbenv/plugins/ruby-build' do
+  repository 'https://github.com/sstephenson/ruby-build.git'
+  reference 'master'
+  user 'root'
+  group 'root'
+  action :checkout
+end
 
 execute "rbenv install 2.2.3" do
-  user   "vagrant"
-  cwd    "/home/vagrant"
-  command   "source ~/.bash_profile && CONFIGURE_OPTS=--disable-install-rdoc rbenv install 2.2.3 -v"
-  # code   "rbenv install -l"
-  # command   "ls -al"
+  # user   "vagrant"
+  # cwd    "/home/vagrant"
+  command   "source /etc/profile.d/rbenv.sh; CONFIGURE_OPTS=--disable-install-rdoc rbenv install 2.2.3 -v"
   action :run
-  not_if { ::File.exists? "/home/vagrant/.rbenv/versions/2.2.3" }
+  not_if { ::File.exists? "/usr/local/rbenv/versions/2.2.3" }
+end
+
+execute 'rbnev-global' do
+  not_if 'source /etc/profile.d/rbenv.sh; rbenv global 2.2.3'
+  command 'source /etc/profile.d/rbenv.sh; rbenv global 2.2.3; rbenv rehash'
 end
