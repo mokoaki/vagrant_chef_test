@@ -21,7 +21,18 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = './cookbooks'
-    chef.add_recipe 'test'
+
+    chef.json = {
+      rbenv: {
+        version: '2.2.3'
+      }
+    }
+
+    chef.run_list = [
+      "recipe[rails_system::init]",
+      "recipe[rails_system::rbenv]",
+      "recipe[rails_system::mysql]"
+    ]
   end
 
   # Disable automatic box update checking. If you disable this, then

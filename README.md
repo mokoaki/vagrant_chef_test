@@ -2,8 +2,7 @@
 
 何が行われるのか？
 - CentOS 7.0 のVMを用意（現在は第3者の用意したもの。もしかして注意）
-- rbenv のインスコ
-- Ruby のインスコ
+- Ruby(rbenv) のインスコ
 - MySQL(MariaDB) のインスコ
 
 先立ってローカルにインスコする必要があるもの
@@ -13,8 +12,8 @@
 
 コマンドラインでこれを打ちましょう
 ```
-$ vagrant plugin install vagrant-omnibus  
-$ vagrant plugin install vagrant-vbguest  
+$ vagrant plugin install vagrant-omnibus
+$ vagrant plugin install vagrant-vbguest
 
 $ mkdir temp
 $ cd temp
