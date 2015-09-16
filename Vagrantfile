@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = 'CentOS7.0_x86_64_minimal_(VirtualBoxGuestAddtions_4.3.14)'
+  config.vm.box = 'centos7.0_x86_64_minimal_virtual_box_guest_addtions_4.3.14'
   config.vm.box_url = 'https://f0fff3908f081cb6461b407be80daf97f07ac418.googledrive.com/host/0BwtuV7VyVTSkUG1PM3pCeDJ4dVE/centos7.box'
 
   config.vm.hostname = 'vagrant-chef-test-vm'
