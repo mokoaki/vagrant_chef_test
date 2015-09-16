@@ -20,8 +20,6 @@ end
   end
 end
 
-# setenforce 0で一時的にSELinuxを無効化し、
-# /etc/selinux/configの作成を通知する
 # selinuxenabledコマンドの終了ステータスが0(selinuxが有効)の場合だけ実行される
 execute "disable selinux enforcement" do
   only_if "which selinuxenabled && selinuxenabled"
@@ -32,8 +30,6 @@ execute "disable selinux enforcement" do
   notifies :create, "template[/etc/selinux/config]"
 end
 
-# 再起動の際もSELinuxの無効状態を維持するために、
-# /etc/selinux/configに、設定を記述する
 template "/etc/selinux/config" do
   source "selinux_config.erb"
   owner "root"
