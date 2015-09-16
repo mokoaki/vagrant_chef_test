@@ -42,7 +42,7 @@ end
 
 template "/etc/ntp.conf" do
   source "ntp.conf.erb"
-  path "/etc/ntp.conf"
+  # path "/etc/ntp.conf"
   owner "root"
   group "root"
   mode "0644"
@@ -50,4 +50,11 @@ end
 
 service 'ntpd' do
   action [:enable, :start]
+end
+
+template "/home/vagrant/.gemrc" do
+  source "gemrc.erb"
+  owner "vagrant"
+  group "vagrant"
+  mode "0644"
 end
