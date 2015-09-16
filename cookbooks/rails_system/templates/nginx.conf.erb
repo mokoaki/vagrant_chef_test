@@ -1,0 +1,31 @@
+user nginx;
+
+#workerのプロセス数　CPUのコア数以下、まぁ一緒にする
+worker_processes 1;
+
+pid /var/run/nginx.pid;
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  #include       /etc/nginx/mime.types;
+  #default_type  application/octet-stream;
+
+  #sendfile()を使うとカーネル空間内でファイルの読み込みと送信が完了するため、効率良くファイルの内容をクライアントに送信
+  #プラットフォームやファイルシステムによっては問題が起きることもあるので、そのときは無効に
+  sendfile on;
+
+  #sendfileが有効なときに、FreeBSDの場合はTCP_NOPUSHソケットオプション、
+  #Linuxの場合はTCP_CORKソケットオプションを使うかを設定します。
+  #このオプションを使うと、レスポンスヘッダとファイルの内容をまとめて送るようになり
+  #少ないパケット数で効率良く送ることができます
+  tcp_nopush on;
+
+  keepalive_timeout 300;
+
+  gzip on;
+
+  include /etc/nginx/conf.d/*.conf;
+}

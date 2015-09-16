@@ -15,14 +15,15 @@ Vagrant.configure(2) do |config|
 
     chef.json = {
       rbenv: {
-        version: '2.2.3'
+        version: '2.2.3',
       }
     }
 
     chef.run_list = [
       "recipe[rails_system::init]",
       "recipe[rails_system::rbenv]",
-      "recipe[rails_system::mysql]"
+      "recipe[rails_system::mysql]",
+      "recipe[rails_system::nginx]",
     ]
   end
 

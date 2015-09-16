@@ -4,6 +4,7 @@
 - CentOS 7.1 のVMを用意（https://github.com/chef/bento）
 - Ruby(rbenv) のインスコ
 - MySQL(MariaDB) のインスコ
+- Nginx のインスコ
 
 先立ってローカルにインスコする必要があるもの
 - VirtualBox
