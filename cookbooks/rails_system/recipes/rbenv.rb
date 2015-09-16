@@ -67,6 +67,7 @@ execute "rbenv install #{target_version}" do
 end
 
 execute "rbnev global #{target_version}" do
-  not_if "source /etc/profile.d/rbenv.sh; rbenv global #{target_version}"
+  # not_if "source /etc/profile.d/rbenv.sh; rbenv global #{target_version}"
   command "source /etc/profile.d/rbenv.sh; rbenv global #{target_version}; rbenv rehash"
+  action :run
 end
