@@ -1,7 +1,7 @@
 #### Railsの実行環境をVagrant-Chefで作れるようにしようプロジェクト
 
 何が行われるのか？
-- CentOS 7.0 のVMを用意（現在は第3者の用意したもの。もしかして注意）
+- CentOS 7.1 のVMを用意（https://github.com/chef/bento）
 - Ruby(rbenv) のインスコ
 - MySQL(MariaDB) のインスコ
 
@@ -24,19 +24,19 @@ $ cd vagrant_chef_test
 $ vagrant up
 ```
 
-```
-# ローカルのソースがマウントされている為、修正はローカルのファイルに対して行う（のかな？）
-# git操作はローカル、bundle install等はVM上で行う（のかな？）
+ローカルのソースがVMへマウントされている為、ソース修正はローカルに対して行う  
+git操作はローカル、bundle install等はVM上で行う  
 
+```
 # VMにてDEV環境を立ち上げる（のかな？）
 
-# VMにSSHログイン（ローカルで打つコマンド）
+# VMにsshログイン（これはローカルで入力）
 $ vagrant ssh
 
 # Rubyの確認してみたりとか
 $ ruby -v
 
-# 例えばこんな風にDEV環境を立ち上げたりする（のかな？）
+# 例えばこんな風にDEV環境を立ち上げたりする（予定）
 $ cd rails/project
 $ bundle exec rails s
 
