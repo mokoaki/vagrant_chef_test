@@ -24,6 +24,7 @@ Vagrant.configure(2) do |config|
       "recipe[rails_system::rbenv]",
       "recipe[rails_system::mysql]",
       "recipe[rails_system::nginx]",
+      "recipe[rails_system::rails]",
     ]
   end
 

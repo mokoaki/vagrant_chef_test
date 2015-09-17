@@ -1,15 +1,22 @@
-#### Railsの実行環境をVagrant-Chefで作れるようにしようプロジェクト
+# Railsの実行環境をVagrant-Chefで作れるようにしようプロジェクト
 
-何が行われるのか？
+####何が行われるのか？
 - CentOS 7.1 のVMを用意（https://github.com/chef/bento）
 - Ruby(rbenv) のインスコ
 - MySQL(MariaDB) のインスコ
 - Nginx のインスコ
+- RubyGem(bundler, nokogiri) のインスコ
 
-先立ってローカルにインスコする必要があるもの
+####先立ってローカルにインスコする必要があるもの
 - VirtualBox
 - Vagrant
 - git
+
+####TODO
+- レシピの適切な構造化
+  - 現状は動けばいいやVer
+- Berkshelf の活用
+  - 勉強不足
 
 コマンドラインでこれを打ちましょう
 ```
@@ -23,6 +30,8 @@ $ git clone git@github.com:mokoaki/vagrant_chef_test.git
 $ cd vagrant_chef_test
 
 $ vagrant up
+
+# ちなみに途中でパスワードを聞かれる カレントディレクトリマウントの為
 ```
 
 ローカルのソースがVMへマウントされている為、ソース修正はローカルに対して行う  
@@ -44,6 +53,8 @@ $ bundle exec rails s
 # VMからログアウト
 $ exit
 ```
+
+ちなみにNginxが動いているので http://192.168.56.11 が見れたりする
 
 ```
 # vagrant 簡単なリファレンス（ローカルで打つコマンド）
