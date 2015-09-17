@@ -60,3 +60,12 @@ bash "rbenv global 2.2.3" do
   code   "source /etc/profile.d/rbenv.sh; rbenv global 2.2.3; rbenv rehash"
   action :run
 end
+
+execute "gem update --system" do
+  user   "vagrant"
+  group  "vagrant"
+  cwd    "/home/vagrant"
+  command   "source /etc/profile.d/rbenv.sh; gem update --system"
+  action :run
+  # not_if { ::File.exists? "/home/vagrant/.rbenv/versions/#{target_version}" }
+end
