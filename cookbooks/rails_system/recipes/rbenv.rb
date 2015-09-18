@@ -29,7 +29,6 @@ git "/home/vagrant/.rbenv/plugins/ruby-build" do
 end
 
 template "/etc/profile.d/rbenv.sh" do
-  path "/etc/profile.d/rbenv.sh"
   owner  "vagrant"
   group  "vagrant"
   mode "0644"

@@ -58,3 +58,10 @@ template "/home/vagrant/.gemrc" do
   group "vagrant"
   mode "0644"
 end
+
+template "/etc/profile.d/alias.sh" do
+  owner  "vagrant"
+  group  "vagrant"
+  mode "0644"
+  source "alias.sh.erb"
+end
