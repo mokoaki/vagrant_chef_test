@@ -3,7 +3,6 @@ yum_package "yum-fastestmirror" do
 end
 
 execute "yum update -y" do
-  user "root"
   command "yum update -y"
   action :run
 end
@@ -42,7 +41,6 @@ end
 
 template "/etc/ntp.conf" do
   source "ntp.conf.erb"
-  # path "/etc/ntp.conf"
   owner "root"
   group "root"
   mode "0644"
@@ -64,4 +62,23 @@ template "/etc/profile.d/alias.sh" do
   group  "vagrant"
   mode "0644"
   source "alias.sh.erb"
+end
+
+execute "git setting" do
+  # user "vagrant"
+  # group "vagrant"
+  # cwd   "/home/vagrant"
+
+  # rootで実行されるのでとりあえず対応
+
+  command <<-EOH
+    su vagrant -l -c 'git config --global user.name "#{node['git']['setting']['user']}"'
+    su vagrant -l -c 'git config --global user.email "#{node['git']['setting']['email']}"'
+    su vagrant -l -c 'git config --global color.ui true'
+    su vagrant -l -c 'git config --global alias.s "status"'
+    su vagrant -l -c 'git config --global alias.c "checkout"'
+    su vagrant -l -c 'git config --global alias.b "branch"'
+    su vagrant -l -c 'git config --global alias.d "diff"'
+    su vagrant -l -c 'git config --global alias.l "log --name-status -3"'
+  EOH
 end

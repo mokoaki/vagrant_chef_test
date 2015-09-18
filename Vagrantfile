@@ -16,6 +16,12 @@ Vagrant.configure(2) do |config|
     chef.json = {
       rbenv: {
         version: '2.2.3',
+      },
+      git: {
+        setting: {
+          user: 'mokoaki',
+          email: 'mokoriso@gmail.com',
+        }
       }
     }
 
