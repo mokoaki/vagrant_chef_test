@@ -1,4 +1,4 @@
-target_version = node['rbenv']['version']
+target_version = node['rbenv']['ruby']['version']
 
 %w{gcc openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel}.each do |pkg|
   yum_package pkg do
