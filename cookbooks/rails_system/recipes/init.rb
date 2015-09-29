@@ -1,5 +1,5 @@
-yum_package "yum-fastestmirror" do
-  action :install
+package "yum-fastestmirror" do
+  action :upgrade
 end
 
 execute "yum update -y" do
@@ -8,8 +8,8 @@ execute "yum update -y" do
 end
 
 %w{git ntp}.each do |pkg|
-  yum_package pkg do
-    action :install
+  package pkg do
+    action :upgrade
   end
 end
 

@@ -1,8 +1,8 @@
 target_version = node['rbenv']['ruby']['version']
 
 %w{gcc openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel}.each do |pkg|
-  yum_package pkg do
-    action :install
+  package pkg do
+    action :upgrade
   end
 end
 

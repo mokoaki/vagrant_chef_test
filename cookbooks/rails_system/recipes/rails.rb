@@ -1,6 +1,6 @@
 %w{libxml2 libxslt libxml2-devel libxslt-devel}.each do |pkg|
-  yum_package pkg do
-    action :install
+  package pkg do
+    action :upgrade
   end
 end
 

@@ -5,8 +5,8 @@ template "/etc/yum.repos.d/nginx.repo" do
   mode "0644"
 end
 
-yum_package "nginx" do
-  action :install
+package "nginx" do
+  action :upgrade
   options "--enablerepo=nginx"
 end
 

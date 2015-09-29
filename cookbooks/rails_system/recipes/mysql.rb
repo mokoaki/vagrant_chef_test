@@ -1,6 +1,6 @@
 %w{mariadb mariadb-server}.each do |pkg|
-  yum_package pkg do
-    action :install
+  package pkg do
+    action :upgrade
   end
 end
 
