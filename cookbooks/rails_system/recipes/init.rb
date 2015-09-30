@@ -1,77 +1,69 @@
-package "yum-fastestmirror" do
+package 'yum-fastestmirror' do
   action :upgrade
 end
 
-execute "yum update -y" do
-  command "yum update -y"
-  action :run
+bash 'yum update -y' do
+  code 'yum update -y'
 end
 
-%w{git ntp}.each do |pkg|
+%w[ git ntp gcc-c++ ].each do |pkg|
   package pkg do
     action :upgrade
   end
 end
 
-%w{firewalld kdump postfix}.each do |svc|
-  service svc do
-    action [:disable, :stop]
+%w[ firewalld kdump postfix ].each do |sv|
+  service sv do
+    action [ :disable, :stop ]
   end
 end
 
 # selinuxenabledコマンドの終了ステータスが0(selinuxが有効)の場合だけ実行される
-execute "disable selinux enforcement" do
-  only_if "which selinuxenabled && selinuxenabled"
-  command "setenforce 0"
-  action :run
+bash 'disable selinux enforcement' do
+  only_if 'which selinuxenabled && selinuxenabled'
+  code 'setenforce 0'
 
   # 呼び出す
-  notifies :create, "template[/etc/selinux/config]"
+  notifies :create, 'template[/etc/selinux/config]'
 end
 
-template "/etc/selinux/config" do
-  source "selinux_config.erb"
-  owner "root"
-  group "root"
-  mode "0644"
+template '/etc/selinux/config' do
+  source 'selinux_config.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
 
   # 通常は動作しない
   action :nothing
 end
 
-template "/etc/ntp.conf" do
-  source "ntp.conf.erb"
-  owner "root"
-  group "root"
-  mode "0644"
+template '/etc/ntp.conf' do
+  source 'ntp.conf.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
 end
 
 service 'ntpd' do
-  action [:enable, :start]
+  action [ :enable, :start ]
 end
 
-template "/home/vagrant/.gemrc" do
-  source "gemrc.erb"
-  owner "vagrant"
-  group "vagrant"
-  mode "0644"
+template '/home/vagrant/.gemrc' do
+  source 'gemrc.erb'
+  owner 'vagrant'
+  group 'vagrant'
+  mode '0644'
 end
 
-template "/etc/profile.d/alias.sh" do
-  owner  "vagrant"
-  group  "vagrant"
-  mode "0644"
-  source "alias.sh.erb"
+template '/etc/profile.d/alias.sh' do
+  source 'alias.sh.erb'
+  owner  'vagrant'
+  group  'vagrant'
+  mode '0644'
 end
 
-execute "git setting" do
-  # user "vagrant"
-  # group "vagrant"
-  # cwd   "/home/vagrant"
-
-  # rootで実行されるのでとりあえず対応
-
-  command <<-EOH
+bash 'git setting' do
+  code <<-EOH
     su vagrant -l -c 'git config --global user.name "#{node['git']['setting']['user']}"'
     su vagrant -l -c 'git config --global user.email "#{node['git']['setting']['email']}"'
     su vagrant -l -c 'git config --global color.ui true'
