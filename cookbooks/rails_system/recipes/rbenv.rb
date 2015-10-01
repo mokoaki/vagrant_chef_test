@@ -18,6 +18,7 @@ directory '/home/vagrant/.rbenv/plugins' do
   owner  'vagrant'
   group  'vagrant'
   action :create
+  not_if { ::File.exists? '/home/vagrant/.rbenv/plugins/' }
 end
 
 git '/home/vagrant/.rbenv/plugins/ruby-build' do
@@ -33,37 +34,31 @@ template '/etc/profile.d/rbenv.sh' do
   group  'vagrant'
   mode '0644'
   source 'rbenv.sh.erb'
+  not_if { ::File.exists? '/etc/profile.d/rbenv.sh' }
 end
 
-execute "rbenv install #{target_version}" do
+bash "rbenv install #{target_version}" do
   user   'vagrant'
   group  'vagrant'
   cwd    '/home/vagrant'
-  command   "source /etc/profile.d/rbenv.sh; CONFIGURE_OPTS=--disable-install-rdoc rbenv install #{target_version} -v"
-  action :run
-  not_if { ::File.exists? "/home/vagrant/.rbenv/versions/#{target_version}" }
+
+  code <<-EOH
+    source /etc/profile.d/rbenv.sh
+    CONFIGURE_OPTS=--disable-install-rdoc rbenv install #{target_version} -v
+    rbenv global #{target_version}
+    rbenv rehash
+  EOH
+
+  not_if { ::File.exists? "/home/vagrant/.rbenv/versions/#{target_version}/" }
 end
 
-execute "rbnev global #{target_version}" do
+bash 'gem update --system' do
   user   'vagrant'
   group  'vagrant'
   cwd    '/home/vagrant'
-  command "source /etc/profile.d/rbenv.sh; rbenv global #{target_version}; rbenv rehash"
-  action :run
-end
 
-bash "rbenv global #{target_version}" do
-  user   'vagrant'
-  group  'vagrant'
-  cwd    '/home/vagrant'
-  code   "source /etc/profile.d/rbenv.sh; rbenv global #{target_version}; rbenv rehash"
-  action :run
-end
-
-execute 'gem update --system' do
-  user   'vagrant'
-  group  'vagrant'
-  cwd    '/home/vagrant'
-  command   'source /etc/profile.d/rbenv.sh; gem update --system'
-  action :run
+  code <<-EOH
+    source /etc/profile.d/rbenv.sh
+    gem update --system
+  EOH
 end
