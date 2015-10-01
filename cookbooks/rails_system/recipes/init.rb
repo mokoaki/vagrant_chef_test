@@ -29,7 +29,6 @@ template '/etc/selinux/config' do
   owner 'root'
   group 'root'
   mode '0644'
-  not_if 'grep SELINUX=disabled /etc/selinux/config'
 end
 
 package 'ntp' do
@@ -41,7 +40,6 @@ template '/etc/ntp.conf' do
   owner 'root'
   group 'root'
   mode '0644'
-  not_if 'grep ntp.nict.jp /etc/ntp.conf'
 end
 
 service 'ntpd' do
@@ -53,7 +51,6 @@ template '/home/vagrant/.gemrc' do
   owner 'vagrant'
   group 'vagrant'
   mode '0644'
-  not_if { ::File.exists? '/home/vagrant/.gemrc' }
 end
 
 template '/etc/profile.d/alias.sh' do
@@ -61,7 +58,6 @@ template '/etc/profile.d/alias.sh' do
   owner  'vagrant'
   group  'vagrant'
   mode '0644'
-  not_if { ::File.exists? '/etc/profile.d/alias.sh' }
 end
 
 bash 'git setting' do
