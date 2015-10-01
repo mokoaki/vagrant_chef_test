@@ -6,7 +6,7 @@ bash 'yum upgrade -y' do
   code 'yum upgrade -y'
 end
 
-%w[ git ntp gcc-c++ ].each do |pkg|
+%w[ git gcc-c++ ].each do |pkg|
   package pkg do
     action :upgrade
   end
@@ -29,7 +29,11 @@ template '/etc/selinux/config' do
   owner 'root'
   group 'root'
   mode '0644'
-  not_if "grep SELINUX=disabled /etc/selinux/config"
+  not_if 'grep SELINUX=disabled /etc/selinux/config'
+end
+
+package 'ntp' do
+  action :upgrade
 end
 
 template '/etc/ntp.conf' do
@@ -37,6 +41,7 @@ template '/etc/ntp.conf' do
   owner 'root'
   group 'root'
   mode '0644'
+  not_if 'grep ntp.nict.jp /etc/ntp.conf'
 end
 
 service 'ntpd' do
