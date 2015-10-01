@@ -2,8 +2,8 @@ package 'yum-fastestmirror' do
   action :upgrade
 end
 
-bash 'yum update -y' do
-  code 'yum update -y'
+bash 'yum upgrade -y' do
+  code 'yum upgrade -y'
 end
 
 %w[ git ntp gcc-c++ ].each do |pkg|
