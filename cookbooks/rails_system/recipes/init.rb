@@ -20,11 +20,8 @@ end
 
 # selinuxenabledコマンドの終了ステータスが0(selinuxが有効)の場合だけ実行される
 bash 'disable selinux enforcement' do
-  only_if 'which selinuxenabled && selinuxenabled'
   code 'setenforce 0'
-
-  # 呼び出す
-  notifies :create, 'template[/etc/selinux/config]'
+  not_if 'getenforce | grep Permissive'
 end
 
 template '/etc/selinux/config' do
@@ -32,9 +29,7 @@ template '/etc/selinux/config' do
   owner 'root'
   group 'root'
   mode '0644'
-
-  # 通常は動作しない
-  action :nothing
+  not_if "grep SELINUX=disabled /etc/selinux/config"
 end
 
 template '/etc/ntp.conf' do
