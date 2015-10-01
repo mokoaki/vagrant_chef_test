@@ -4,20 +4,21 @@
 - CentOS 7.1 のVMを用意（https://github.com/chef/bento）
 - Ruby(rbenv) のインスコ
 - MySQL(MariaDB) のインスコ
+- Redis のインスコ
 - Nginx のインスコ
 - RubyGem(bundler, nokogiri) のインスコ
 
-####先立ってローカルにインスコする必要があるもの
-- VirtualBox
-- Vagrant
+####先立ってローカルにインスコしておく必要があるもの
+- VirtualBox https://www.virtualbox.org/wiki/Downloads
+- Vagrant https://www.vagrantup.com/downloads.html
 - git
 
 ####TODO
 - レシピの適切な構造化
-  - 現状は動けばいいやVer
-- Berkshelf の活用
+  - 現状はまぁ動けばいいやVer
+- Berkshelf の活用（？）
   - 勉強不足
-- not_if をしっかりつける
+- not_ifをしっかりつける
 
 コマンドラインでこれを打ちましょう
 ```
@@ -32,15 +33,15 @@ $ cd vagrant_chef_test
 
 $ vagrant up
 
-# ちなみに途中でパスワードを聞かれる カレントディレクトリマウントの為
+# 数10分ほど画面を見ながらニヤニヤする
+# ちなみに途中でローカルのパスワードを聞かれる ローカルディレクトリマウントの為
 ```
 
 ローカルのソースがVMへマウントされている為、ソース修正はローカルに対して行う  
-git操作はローカル、bundle install等はVM上で行う  
+git操作はローカルで行う  
+bundle install等はVM上で行う  
 
 ```
-# VMにてDEV環境を立ち上げる（のかな？）
-
 # VMにsshログイン（これはローカルで入力）
 $ vagrant ssh
 
