@@ -53,6 +53,7 @@ template '/home/vagrant/.gemrc' do
   owner 'vagrant'
   group 'vagrant'
   mode '0644'
+  not_if { ::File.exists? '/home/vagrant/.gemrc' }
 end
 
 template '/etc/profile.d/alias.sh' do
@@ -60,6 +61,7 @@ template '/etc/profile.d/alias.sh' do
   owner  'vagrant'
   group  'vagrant'
   mode '0644'
+  not_if { ::File.exists? '/etc/profile.d/alias.sh' }
 end
 
 bash 'git setting' do
