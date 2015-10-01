@@ -171,7 +171,8 @@ rdbcompression yes
 #
 # RDB files created with checksum disabled have a checksum of zero that will
 # tell the loading code to skip the check.
-rdbchecksum yes
+# default yes
+rdbchecksum no
 
 # The filename where to dump the DB
 dbfilename dump.rdb
