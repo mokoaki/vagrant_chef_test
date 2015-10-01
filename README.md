@@ -1,7 +1,7 @@
 # Railsの実行環境をVagrant-Chefで作れるようにしようプロジェクト
 
 ####何が行われるのか？
-- CentOS 7.1 のVMを用意（https://github.com/chef/bento）
+- CentOS 7.1 のVMを用意 https://github.com/chef/bento
 - Ruby(rbenv) のインスコ
 - MySQL(MariaDB) のインスコ
 - Redis のインスコ
