@@ -7,20 +7,26 @@
 - Redis のインスコ
 - Nginx のインスコ
 - RubyGem(bundler, nokogiri) のインスコ
+- Railsの設定
 
 ####先立ってローカルにインスコしておく必要があるもの
 - VirtualBox https://www.virtualbox.org/wiki/Downloads
 - Vagrant https://www.vagrantup.com/downloads.html
 - git
 
-####TODO
-- レシピの適切な構造化
-  - 現状はまぁ動けばいいやVer
-- Berkshelf の活用（？）
-  - 勉強不足
-- not_ifをしっかりつける
+####VM作成するのに最低限必要なのは
+- Vagrantfile
+- cookbooks/
+この2つだけ 他はRailsのサンプルアプリ関係とか
 
-コマンドラインでこれを打ちましょう
+####TODO
+- レシピの適切な構造化、お作法
+  - 現状はまぁ動けばいいやVer
+- Berkshelfの活用（？）
+  - 勉強不足
+- only_if, not_ifをしっかりつける
+
+####では、やってみましょう
 ```
 $ vagrant plugin install vagrant-omnibus
 $ vagrant plugin install vagrant-vbguest
@@ -37,6 +43,8 @@ $ vagrant up
 # ちなみに途中でローカルのパスワードを聞かれる ローカルディレクトリマウントの為
 ```
 
+http://192.168.56.11/ を確認しましょう  
+
 ローカルのソースがVMへマウントされている為、ソース修正はローカルに対して行う  
 git操作はローカルで行う  
 bundle install等はVM上で行う  
@@ -48,15 +56,9 @@ $ vagrant ssh
 # Rubyの確認してみたりとか
 $ ruby -v
 
-# 例えばこんな風にDEV環境を立ち上げたりする（予定）
-$ cd rails/project
-$ bundle exec rails s
-
 # VMからログアウト
 $ exit
 ```
-
-ちなみにNginxが動いているので http://192.168.56.11 が見れたりする
 
 ```
 # vagrant 簡単なリファレンス（ローカルで打つコマンド）
@@ -67,7 +69,7 @@ $ vagrant halt
 # VM起動
 $ vagrant up
 
-# VM削除（もちろん、修正中のソース等には影響はなく、いつでも気軽に削除し、再度作成できる筈である）
+# VM削除（もちろん、修正中のソース等には影響はなく、いつでも気軽に削除し、作り直せる筈である）
 $ vagrant destroy
 
 # 他にも

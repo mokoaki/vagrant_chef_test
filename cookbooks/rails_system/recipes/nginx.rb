@@ -19,19 +19,18 @@ template '/etc/nginx/nginx.conf' do
   owner 'root'
   group 'root'
   mode '0644'
-  notifies :reload , 'service[nginx]'
+  notifies :reload, 'service[nginx]'
 end
 
-# とりあえずRailsを用意しないと動かなくなるのでコメントアウト
-# template '/etc/nginx/conf.d/nginx_testapp.conf' do
-#   source 'nginx_testapp.conf.erb'
-#   owner 'root'
-#   group 'root'
-#   mode '0644'
-#   notifies :reload , 'service[nginx]'
-# end
-#
-# file '/etc/nginx/conf.d/default.conf' do
-#   action :delete
-#   notifies :reload , 'service[nginx]'
-# end
+template '/etc/nginx/conf.d/sample_app.conf' do
+  source 'sample_app.conf.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  notifies :reload, 'service[nginx]'
+end
+
+file '/etc/nginx/conf.d/default.conf' do
+  action :delete
+  notifies :reload, 'service[nginx]'
+end

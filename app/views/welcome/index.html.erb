@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sample</title>
+  </head>
+
+  <body>
+    このページは、さっき作ったVM内で動いているRailsで生成された画面です　やったね<br>
+    <br>
+    ブラウザ <= nginx <= unicorn <= Rails <= (MySQL, Redis)<br>
+    <br>
+    <%= @user[:name] %><br>
+    <br>
+    <%= @redis_test_data %>
+  </body>
+</html>
