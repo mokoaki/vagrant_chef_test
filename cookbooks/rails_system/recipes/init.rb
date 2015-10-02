@@ -18,10 +18,9 @@ end
   end
 end
 
-# selinuxenabledコマンドの終了ステータスが0(selinuxが有効)の場合だけ実行される
 bash 'disable selinux enforcement' do
   code 'setenforce 0'
-  not_if 'getenforce | grep Permissive'
+  not_if 'getenforce | grep Disabled'
 end
 
 template '/etc/selinux/config' do
