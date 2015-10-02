@@ -10,7 +10,7 @@ package 'nginx' do
   options '--enablerepo=nginx'
 end
 
-service "nginx" do
+service 'nginx' do
   action [ :enable, :start ]
 end
 
@@ -23,14 +23,15 @@ template '/etc/nginx/nginx.conf' do
 end
 
 # とりあえずRailsを用意しないと動かなくなるのでコメントアウト
-# template "/etc/nginx/conf.d/nginx_testapp.conf" do
-#   source "nginx_testapp.conf.erb"
+# template '/etc/nginx/conf.d/nginx_testapp.conf' do
+#   source 'nginx_testapp.conf.erb'
 #   owner 'root'
 #   group 'root'
 #   mode '0644'
 #   notifies :reload , 'service[nginx]'
 # end
 #
-# file "/etc/nginx/conf.d/default.conf" do
+# file '/etc/nginx/conf.d/default.conf' do
 #   action :delete
+#   notifies :reload , 'service[nginx]'
 # end
