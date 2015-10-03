@@ -4,55 +4,33 @@
   end
 end
 
-bash 'gem install bundler' do
-  user   'vagrant'
-  group  'vagrant'
-  cwd    '/home/vagrant'
+node['rbenv']['ruby']['default_gems'].each do |gem|
+  bash "gem install #{gem['name']}" do
+    user   'vagrant'
+    group  'vagrant'
+    cwd    '/home/vagrant'
 
-  code <<-EOH
-    source /etc/profile.d/rbenv.sh
-    gem install bundler
-  EOH
+    code <<-EOH
+      source /etc/profile.d/rbenv.sh
+      gem install #{gem['name']} #{gem['options']}
+    EOH
 
-  # not_if 'gem list | grep "bundler ("'
+    not_if "source /etc/profile.d/rbenv.sh; gem list | grep #{gem['name']}"
+  end
+
+  bash "gem update #{gem['name']}" do
+    user   'vagrant'
+    group  'vagrant'
+    cwd    '/home/vagrant'
+
+    code <<-EOH
+      source /etc/profile.d/rbenv.sh
+      gem update #{gem['name']} #{gem['options']}
+    EOH
+  end
 end
 
-bash 'gem update bundler' do
-  user   'vagrant'
-  group  'vagrant'
-  cwd    '/home/vagrant'
-
-  code <<-EOH
-    source /etc/profile.d/rbenv.sh
-    gem update bundler
-  EOH
-end
-
-bash 'gem install nokogiri' do
-  user   'vagrant'
-  group  'vagrant'
-  cwd    '/home/vagrant'
-
-  code <<-EOH
-    source /etc/profile.d/rbenv.sh
-    gem install nokogiri -- --use-system-libraries
-  EOH
-
-  # not_if 'gem list | grep "nokogiri ("'
-end
-
-bash 'gem update nokogiri' do
-  user   'vagrant'
-  group  'vagrant'
-  cwd    '/home/vagrant'
-
-  code <<-EOH
-    source /etc/profile.d/rbenv.sh
-    gem update nokogiri -- --use-system-libraries
-  EOH
-end
-
-bash 'rails init' do
+bash 'rails db init' do
   user   'vagrant'
   group  'vagrant'
   cwd    '/vagrant'
@@ -76,5 +54,5 @@ bash 'rails unicorn start' do
     bundle exec rake unicorn:start
   EOH
 
-  # not_if 'ps -aux | grep "unicorn_rails master"'
+  not_if 'ps -aux | grep "unicorn_rails master" | grep -v grep'
 end

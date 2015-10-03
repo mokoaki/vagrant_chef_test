@@ -6,7 +6,7 @@ bash 'yum upgrade -y' do
   code 'yum upgrade -y'
 end
 
-%w[ git gcc-c++ ].each do |pkg|
+%w[ git gcc-c++ kernel-devel ].each do |pkg|
   package pkg do
     action :upgrade
   end

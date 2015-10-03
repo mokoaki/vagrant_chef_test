@@ -2,7 +2,6 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  # https://github.com/chef/bento
   config.vm.box = 'chef/bento/centos-7.1'
   config.vm.box_url = 'http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-7.1_chef-provisionerless.box'
 
@@ -17,6 +16,16 @@ Vagrant.configure(2) do |config|
       rbenv: {
         ruby: {
           version: '2.2.3',
+          default_gems:[
+            {
+              name: 'bundler',
+              options: '',
+            },
+            {
+              name: 'nokogiri',
+              options: '-- --use-system-libraries',
+            },
+          ],
         },
       },
       git: {
