@@ -44,15 +44,13 @@ bash 'rails db init' do
   EOH
 end
 
-bash 'rails unicorn start' do
-  user   'vagrant'
-  group  'vagrant'
-  cwd    '/vagrant'
+template '/etc/systemd/system/sample-unicorn.service' do
+  source 'sample-unicorn.service.erb'
+  owner 'root'
+  group 'root'
+  mode '0755'
+end
 
-  code <<-EOH
-    source /etc/profile.d/rbenv.sh
-    bundle exec rake unicorn:start
-  EOH
-
-  not_if 'ps -aux | grep "unicorn_rails master" | grep -v grep'
+service 'sample-unicorn' do
+  action [ :enable, :start ]
 end

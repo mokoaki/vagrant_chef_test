@@ -1,0 +1,15 @@
+[Unit]
+Description=Sample Unicorn Server
+
+[Service]
+WorkingDirectory=/vagrant
+Environment=RAILS_ENV=development
+SyslogIdentifier=redmine-unicorn
+PIDFile=/vagrant/tmp/pids/unicorn.pid
+
+ExecStart=/home/vagrant/.rbenv/shims/bundle exec unicorn_rails -D -c config/unicorn.rb -E development
+ExecStop=/usr/bin/kill -QUIT $MAINPID
+ExecReload=/bin/kill -USR2 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
