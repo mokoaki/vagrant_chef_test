@@ -43,14 +43,3 @@ bash 'rails db init' do
     bundle exec rake db:seed
   EOH
 end
-
-template '/etc/systemd/system/sample-unicorn.service' do
-  source 'sample-unicorn.service.erb'
-  owner 'root'
-  group 'root'
-  mode '0755'
-end
-
-service 'sample-unicorn' do
-  action [ :enable, :start ]
-end

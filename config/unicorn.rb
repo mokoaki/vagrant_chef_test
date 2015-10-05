@@ -3,10 +3,10 @@
 worker_processes 2
 
 #Nginxとプロキシ組む場合
-listen '/vagrant/tmp/sockets/unicorn.sock'
+# listen '/vagrant/tmp/sockets/unicorn.sock'
 
 #開発時
-# listen 3000
+listen 3000
 
 pid 'tmp/pids/unicorn.pid'
 

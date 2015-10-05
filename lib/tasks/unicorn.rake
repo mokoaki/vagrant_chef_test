@@ -1,9 +1,8 @@
 namespace :unicorn do
   #Start unicorn
   task :start do
-    config = rails_root + 'config/unicorn.rb'
     env = ENV['RAILS_ENV'] || 'development'
-    sh "bundle exec unicorn_rails -D -c #{config} -E #{env}"
+    sh "bundle exec unicorn_rails -D -c #{unicorn_config_file} -E #{env}"
   end
 
   #Stop unicorn
@@ -39,10 +38,14 @@ namespace :unicorn do
 
   def unicorn_pid
     begin
-      File.read(rails_root + 'tmp/pids/unicorn.pid').to_i
+      File.read(File.join(rails_root, 'tmp/pids/unicorn.pid')).to_i
     rescue Errno::ENOENT
       raise "Unicorn doesn't seem to be running"
     end
+  end
+
+  def unicorn_config_file
+    File.join(rails_root, 'config/unicorn.rb')
   end
 
   def rails_root

@@ -1,11 +1,13 @@
-# Railsの実行環境をVagrant-Chefで作れるようにしようプロジェクト
+# Railsの開発環境をVagrant-Chefで作れるようにしようプロジェクト
+
+####ブラウザ ← unicorn ← Rails ← (MySQL, Redis)
 
 ####何が行われるのか？
 - CentOS 7.1 のVMを用意 https://github.com/chef/bento
 - Ruby(rbenv) のインスコ
 - MySQL(MariaDB) のインスコ
 - Redis のインスコ
-- Nginx のインスコ
+- ~~Nginx のインスコ~~（開発環境にnginxなぞ要らん！という神の啓示で削除 昔のコミットにはある）
 - RubyGem(bundler, nokogiri) のインスコ
 - Railsの設定
 
@@ -14,7 +16,7 @@
 - Vagrant https://www.vagrantup.com/downloads.html
 - git
 
-####VM作成するのに最低限必要なのは
+####VM作成するのに最低限必要なファイルは
 - Vagrantfile
 - cookbooks/
 この2つだけ 他はRailsのサンプルアプリ関係とか
@@ -40,24 +42,29 @@ $ vagrant up
 
 # 数10分ほど画面を見ながらニヤニヤする
 # ちなみに途中でローカルのパスワードを聞かれる ローカルディレクトリマウントの為
-```
 
-http://192.168.56.11/ を確認しましょう  
-
-ローカルのソースがVMへマウントされている為、ソース修正はローカルに対して行う  
-git操作はローカルで行う  
-bundle install等はVM上で行う  
-
-```
 # VMにsshログイン（これはローカルで入力）
 $ vagrant ssh
 
+$ cd /vagrant
+
+# unicorn起動
+$ bundle exec spring rake unicorn:start
+```
+
+http://192.168.56.11:3000/ を確認しましょう  
+
+```
 # Rubyの確認してみたりとか
 $ ruby -v
 
-# VMからログアウト
+# VMからログアウトしてみたりとか
 $ exit
 ```
+
+ソース修正はローカルに対して行う（ローカルのソースがVMへマウントされている）  
+git操作はローカルで行う  
+bundle install的なコマンドはVM上で行う  
 
 ```
 # vagrant 簡単なリファレンス（ローカルで打つコマンド）
