@@ -24,5 +24,7 @@ module Sample
     config.active_record.raise_in_transactional_callbacks = true
 
     config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 7.days }
+
+    config.web_console.whitelisted_ips = '192.168.56.1'
   end
 end
