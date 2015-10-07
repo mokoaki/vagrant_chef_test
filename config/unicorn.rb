@@ -10,8 +10,8 @@ listen 3000
 
 pid 'tmp/pids/unicorn.pid'
 
-#15秒Railsが反応しなければWorkerをkillしてタイムアウト
-timeout 15
+#60秒Railsが反応しなければWorkerをkillしてタイムアウト
+timeout 60
 
 #ダウンタイムをなくす
 preload_app true
