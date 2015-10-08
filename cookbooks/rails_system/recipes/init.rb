@@ -30,18 +30,18 @@ template '/etc/selinux/config' do
   mode '0644'
 end
 
-package 'ntp' do
+package 'chrony' do
   action :upgrade
 end
 
-template '/etc/ntp.conf' do
-  source 'ntp.conf.erb'
+template '/etc/chrony.conf' do
+  source 'chrony.conf.erb'
   owner 'root'
   group 'root'
   mode '0644'
 end
 
-service 'ntpd' do
+service 'chronyd' do
   action [ :enable, :start ]
 end
 
