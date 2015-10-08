@@ -46,17 +46,30 @@ namespace :unicorn do
     File.read(unicorn_pid_file_path).to_i
   end
 
+  # unicornが起動してるはずだよね？
   def should_unicorn_is_running
+    check_unicorn_process_and_pid_file_delete
+
     unless unicorn_pid_file_exists?
       puts "Unicorn doesn't seem to be running"
       exit false
     end
   end
 
+  # unicornは起動していないはずだよね？
   def should_unicorn_is_not_running
+    check_unicorn_process_and_pid_file_delete
+
     if unicorn_pid_file_exists?
       puts 'Unicorn seem to be running'
       exit false
+    end
+  end
+
+  def check_unicorn_process_and_pid_file_delete
+    # プロセスが起動していないのにpidファイルがある・・だと？
+    if unicorn_pid_file_exists? && !check_unicorn_alive?
+      File.delete(unicorn_pid_file_path)
     end
   end
 
@@ -74,6 +87,10 @@ namespace :unicorn do
 
   def unicorn_config_file_exists?
     File.exist?(unicorn_config_file_path)
+  end
+
+  def check_unicorn_alive?
+    !!(`ps -ef | grep "unicorn_rails master" | grep -v grep` =~ /unicorn_rails master/)
   end
 
   def rails_root
