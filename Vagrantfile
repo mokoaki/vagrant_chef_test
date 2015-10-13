@@ -38,9 +38,9 @@ Vagrant.configure(2) do |config|
 
     chef.run_list = [
       'recipe[rails_system::init]',
-      'recipe[rails_system::rbenv]',
       'recipe[rails_system::mysql]',
       'recipe[rails_system::redis]',
+      'recipe[rails_system::rbenv]',
       'recipe[rails_system::rails]',
     ]
   end
