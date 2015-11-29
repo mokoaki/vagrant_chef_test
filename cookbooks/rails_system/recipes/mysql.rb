@@ -12,7 +12,7 @@ end
   end
 end
 
-service 'mysql' do
+service 'mariadb' do
   action [ :enable, :start ]
 end
 
@@ -22,7 +22,7 @@ template '/etc/my.cnf' do
   group 'root'
   mode '0644'
 
-  notifies :restart , 'service[mysql]'
+  notifies :restart , 'service[mariadb]'
 end
 
 template '/etc/my.cnf.d/client.cnf' do
@@ -31,7 +31,7 @@ template '/etc/my.cnf.d/client.cnf' do
   group 'root'
   mode '0644'
 
-  notifies :restart , 'service[mysql]'
+  notifies :restart , 'service[mariadb]'
 end
 
 template '/etc/my.cnf.d/mysql-clients.cnf' do
@@ -40,7 +40,7 @@ template '/etc/my.cnf.d/mysql-clients.cnf' do
   group 'root'
   mode '0644'
 
-  notifies :restart , 'service[mysql]'
+  notifies :restart , 'service[mariadb]'
 end
 
 template '/etc/my.cnf.d/server.cnf' do
@@ -49,7 +49,7 @@ template '/etc/my.cnf.d/server.cnf' do
   group 'root'
   mode '0644'
 
-  notifies :restart , 'service[mysql]'
+  notifies :restart , 'service[mariadb]'
 end
 
 template '/etc/my.cnf.d/tokudb.cnf' do
@@ -58,5 +58,5 @@ template '/etc/my.cnf.d/tokudb.cnf' do
   group 'root'
   mode '0644'
 
-  notifies :restart , 'service[mysql]'
+  notifies :restart , 'service[mariadb]'
 end
