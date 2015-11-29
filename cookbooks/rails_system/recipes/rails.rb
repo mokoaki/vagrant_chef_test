@@ -4,32 +4,41 @@
   end
 end
 
-node['rbenv']['ruby']['default_gems'].each do |gem|
-  bash "gem update #{gem['name']}" do
-    user   'vagrant'
-    group  'vagrant'
-    cwd    '/home/vagrant'
+bash 'gem update bundler' do
+  user   'vagrant'
+  group  'vagrant'
+  cwd    '/home/vagrant'
 
-    code <<-EOH
-      source /etc/profile.d/rbenv.sh
-      gem update #{gem['name']} #{gem['options']}
-    EOH
+  code <<-EOH
+    source /etc/profile.d/rbenv.sh
+    gem update bundler
+  EOH
 
-    only_if "source /etc/profile.d/rbenv.sh; gem list | grep #{gem['name']}"
-  end
+  only_if 'source /etc/profile.d/rbenv.sh; gem list | grep bundler'
+end
 
-  bash "gem install #{gem['name']}" do
-    user   'vagrant'
-    group  'vagrant'
-    cwd    '/home/vagrant'
+bash 'gem install bundler' do
+  user   'vagrant'
+  group  'vagrant'
+  cwd    '/home/vagrant'
 
-    code <<-EOH
-      source /etc/profile.d/rbenv.sh
-      gem install #{gem['name']} #{gem['options']}
-    EOH
+  code <<-EOH
+    source /etc/profile.d/rbenv.sh
+    gem install bundler
+  EOH
 
-    not_if "source /etc/profile.d/rbenv.sh; gem list | grep #{gem['name']}"
-  end
+  not_if 'source /etc/profile.d/rbenv.sh; gem list | grep bundler'
+end
+
+bash 'rails gem init' do
+  user   'vagrant'
+  group  'vagrant'
+  cwd    '/vagrant'
+
+  code <<-EOH
+    source /etc/profile.d/rbenv.sh
+    bundle install
+  EOH
 end
 
 bash 'rails db init' do
@@ -39,7 +48,6 @@ bash 'rails db init' do
 
   code <<-EOH
     source /etc/profile.d/rbenv.sh
-    bundle install
     bundle exec rake db:create
     bundle exec rake db:migrate
     bundle exec rake db:seed

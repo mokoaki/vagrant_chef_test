@@ -16,16 +16,6 @@ Vagrant.configure(2) do |config|
       rbenv: {
         ruby: {
           version: '2.2.3',
-          default_gems:[
-            {
-              name: 'bundler',
-              options: '',
-            },
-            {
-              name: 'nokogiri',
-              options: '-- --use-system-libraries',
-            },
-          ],
         },
       },
       git: {
