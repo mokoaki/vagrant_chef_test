@@ -38,6 +38,7 @@ bash 'rails gem init' do
   code <<-EOH
     source /etc/profile.d/rbenv.sh
     bundle install
+    bundle update
   EOH
 end
 
