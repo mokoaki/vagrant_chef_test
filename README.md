@@ -45,15 +45,22 @@ $ vagrant up
 # 数10分ほど画面を見ながらニヤニヤする
 # ちなみに途中でローカルのパスワードを聞かれる ローカルディレクトリマウントの為
 
+# いつの間にか落ちるようになってしまった　ダサい対応で回避　VirtualBoxかvagrantあたりの対応待ち？
+# 赤い画面でエラーを書いても気にしない
+
+$ vagrant ssh
+$ sudo yum install -y kernel kernel-devel
+$ exit
+
+$ vagrant halt
+$ vagrant up --provision
+
 # VMにsshログイン
 $ vagrant ssh
-
-# ここからはVM上でのコマンドですよ
-
 $ cd /vagrant
 
 # unicorn起動
-$ bundle exec spring rake unicorn:start
+$ bundle exec rake unicorn:start
 ```
 
 http://192.168.56.11:3000/ を確認しましょう  
