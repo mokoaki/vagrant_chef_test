@@ -5,7 +5,7 @@ template '/etc/yum.repos.d/mariadb.repo' do
   mode '0644'
 end
 
-%w[ MariaDB-server MariaDB-client ].each do |pkg|
+%w[ MariaDB-server MariaDB-client MariaDB-devel ].each do |pkg|
   package pkg do
     action :upgrade
     options '--enablerepo=mariadb'
