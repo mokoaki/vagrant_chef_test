@@ -3,7 +3,7 @@
 ####ブラウザ ← unicorn ← Rails ← (MySQL, Redis)
 
 ####何が行われるのか？
-- CentOS 7.1 のVMを用意 https://github.com/chef/bento
+- CentOS 7.2 のVMを用意 https://github.com/chef/bento
 - Ruby(rbenv) のインスコ
 - MySQL(MariaDB) のインスコ
 - Redis のインスコ
@@ -42,16 +42,6 @@ $ vagrant up
 
 # 数10分ほど画面を見ながらニヤニヤする
 # ちなみに途中でローカルのパスワードを聞かれる ローカルディレクトリマウントの為
-
-# いつの間にか落ちるようになってしまった　ダサい対応で回避　VirtualBoxかvagrantあたりの対応待ち？
-# 赤い画面でエラーが出ても気にしない
-
-$ vagrant ssh
-$ sudo yum install -y kernel kernel-devel
-$ exit
-
-$ vagrant halt
-$ vagrant up --provision
 
 # VMにsshログイン
 $ vagrant ssh
