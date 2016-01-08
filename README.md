@@ -82,5 +82,7 @@ $ vagrant suspend
 $ vagrant resume
 $ vagrant reload
 $ vagrant provision
+$ vagrant reload --provision
 $ vagrant up --provision
+$ vagrant up --no-provision
 ```
