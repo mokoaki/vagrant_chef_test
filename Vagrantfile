@@ -62,9 +62,10 @@ Vagrant.configure(2) do |config|
     if host =~ /darwin/
       cpus = `sysctl -n hw.ncpu`.to_i
 
-      # 全メモリの四分の一、もしくは1GB、少ない方の数値でVMのメモリ量とする
-      all_memory_quarter = `sysctl -n hw.memsize`.to_i / 1024 / 1024 / 4
-      mem = [1024, all_memory_quarter].min
+      # ホストOSのメモリ量
+      all_memory = `sysctl -n hw.memsize`.to_i / 1024 / 1024
+      # メモリの1/4、もしくは1GB、少ない方の数値でVMのメモリ量とする
+      mem = [1024, all_memory / 4].min
 
       # elsif host =~ /linux/
       #   cpus = `nproc`.to_i
