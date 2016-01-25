@@ -8,8 +8,8 @@
 - MySQL(MariaDB) のインスコ
 - Redis のインスコ
 - ~~Nginx のインスコ~~（開発環境にnginxなぞ要らん！という神の啓示で削除 昔のコミットにはある）
-- RubyGem(bundler, nokogiri) のインスコ
-- Railsの設定
+- bundler のインスコ
+- Rails の設定
 
 ####先立ってローカルにインスコしておく必要があるもの
 - VirtualBox https://www.virtualbox.org/wiki/Downloads
