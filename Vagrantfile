@@ -58,7 +58,7 @@ Vagrant.configure(2) do |config|
     host = RbConfig::CONFIG['host_os']
 
     if host =~ /darwin/
-      cpus = `sysctl -n hw.ncpu`.to_i
+      cpus = `sysctl -n hw.physicalcpu_max`.to_i
 
       # ホストOSのメモリ量
       all_memory = `sysctl -n hw.memsize`.to_i / 1024 / 1024
