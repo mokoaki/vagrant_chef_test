@@ -1,8 +1,8 @@
 # Railsの開発環境をVagrant-Chefで作れるようにしようプロジェクト
 
-####ブラウザ ← unicorn ← Rails ← (MySQL, Redis)
+#### ブラウザ ← unicorn ← Rails ← (MySQL, Redis)
 
-####何が行われるのか？
+#### 何が行われるのか？
 - CentOS 7.2 のVMを用意 https://github.com/chef/bento
 - Ruby(rbenv) のインスコ
 - MySQL(MariaDB) のインスコ
@@ -11,23 +11,23 @@
 - bundler のインスコ
 - Rails の設定
 
-####先立ってローカルにインスコしておく必要があるもの
+#### 先立ってローカルにインスコしておく必要があるもの
 - VirtualBox https://www.virtualbox.org/wiki/Downloads
 - Vagrant https://www.vagrantup.com/downloads.html
 - git
 
-####VM作成するのに最低限必要なファイルは
+#### VM作成するのに最低限必要なファイルは
 - Vagrantfile
 - cookbooks/
 この2つだけ 他はRailsのサンプルアプリ関係とか
 
-####TODO
+#### TODO
 - レシピの適切な構造化、お作法
   - 現状はまぁ動けばいいやVer
 - Berkshelfの活用（要るのか？）
   - 勉強不足
 
-####では、やってみましょう
+#### では、やってみましょう
 ```
 $ vagrant plugin install vagrant-omnibus
 $ vagrant plugin install vagrant-vbguest
@@ -51,7 +51,7 @@ $ cd /vagrant
 $ bundle exec rake unicorn:start
 ```
 
-http://192.168.56.11:3000/ を確認しましょう  
+http://192.168.56.11:3000/ を確認しましょう
 
 ```
 # Rubyの確認してみたりとか
@@ -61,13 +61,35 @@ $ ruby -v
 $ exit
 ```
 
-ソース修正はローカルに対して行う（ローカルのソースがVMへマウントされている）  
-git操作はローカルで行う  
-bundle install的なコマンドはVM上で行う  
+ソース修正はローカルに対して行う（ローカルのソースがVMへマウントされている）
+
+git操作はローカルで行う
+
+bundle install的なコマンドはVM上で行う
+
+#### エラーすか
+
+`Too many open files - getcwd (Errno::EMFILE)`
+
+ファイルディスクリプタの上限オーバー、数を確認して増やす
 
 ```
-# vagrant 簡単なリファレンス（ローカルで打つコマンド）
+# MACならこんな感じ 他は適当に
 
+$ ulimit -n
+256
+# 現在256っすか
+
+$ ulimit -n 512
+# とりあえず512を指定
+
+$ vagrant reload --provision
+# 適当にやりなおす
+```
+
+#### vagrant 簡単なコマンドリスト（ローカルで打つコマンドだよ）
+
+```
 # VMシャットダウン
 $ vagrant halt
 
