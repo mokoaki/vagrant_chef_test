@@ -44,7 +44,7 @@ bash "rbenv install #{target_version}" do
 
   code <<-EOH
     source /etc/profile.d/rbenv.sh
-    CONFIGURE_OPTS=--disable-install-rdoc rbenv install #{target_version} -v
+    CONFIGURE_OPTS="--disable-install-rdoc" MAKE_OPTS="-j 2" rbenv install #{target_version} -v
     rbenv global #{target_version}
     rbenv rehash
   EOH
