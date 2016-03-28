@@ -22,12 +22,18 @@ Vagrant.configure(2) do |config|
           email: 'mokoriso@gmail.com',
         },
       },
+      phantomjs: {
+        # http://phantomjs.org/download.html
+        download_path: 'https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2',
+        extension_name: '.tar.bz2',
+      },
     }
 
     chef.run_list = [
       'recipe[rails_system::init]',
       'recipe[rails_system::mysql]',
       'recipe[rails_system::redis]',
+      'recipe[rails_system::phantomjs]',
       'recipe[rails_system::rbenv]',
       'recipe[rails_system::rails]',
     ]
