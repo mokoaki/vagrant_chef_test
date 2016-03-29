@@ -31,6 +31,9 @@ gem 'redis-rails'
 # Use Unicorn as the app server
 gem 'unicorn'
 gem 'unicorn-worker-killer'
+gem 'capybara'
+gem 'poltergeist'
+gem 'database_cleaner'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
