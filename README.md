@@ -7,6 +7,7 @@
 - Ruby(rbenv) のインスコ
 - MySQL(MariaDB) のインスコ
 - Redis のインスコ
+- PhantomJS のインスコ
 - ~~Nginx のインスコ~~（開発環境にnginxなぞ要らん！という神の啓示で削除 昔のコミットにはある）
 - bundler のインスコ
 - Rails の設定
@@ -29,36 +30,40 @@
 
 #### では、やってみましょう
 ```
-$ vagrant plugin install vagrant-omnibus
-$ vagrant plugin install vagrant-vbguest
+> vagrant plugin install vagrant-omnibus
+> vagrant plugin install vagrant-vbguest
 
-$ mkdir temp
-$ cd temp
+> mkdir temp
+> cd temp
 
-$ git clone git@github.com:mokoaki/vagrant_chef_test.git
-$ cd vagrant_chef_test
+> git clone git@github.com:mokoaki/vagrant_chef_test.git
+> cd vagrant_chef_test
 
-$ vagrant up
+> vagrant up
 
 # 数10分ほど画面を見ながらニヤニヤする
 # ちなみに途中でローカルのパスワードを聞かれる ローカルディレクトリマウントの為
 
 # VMにsshログイン
-$ vagrant ssh
-$ cd /vagrant
+> vagrant ssh
+> cd /vagrant
 
 # unicorn起動
-$ bundle exec rake unicorn:start
+> bundle exec rake unicorn:start
 ```
 
 http://192.168.56.11:3000/ を確認しましょう
 
 ```
 # Rubyの確認してみたりとか
-$ ruby -v
+> ruby -v
+
+# テストしてみたりとか(PhantomJS使ってるので、jsのテストも出来る筈)
+> cd /vagrant
+> bundle exec spring rspec spec/
 
 # VMからログアウトしてみたりとか
-$ exit
+> exit
 ```
 
 ソース修正はローカルに対して行う（ローカルのソースがVMへマウントされている）
@@ -76,14 +81,14 @@ bundle install的なコマンドはVM上で行う
 ```
 # MACならこんな感じ 他は適当に
 
-$ ulimit -n
+> ulimit -n
 256
 # 現在256っすか
 
-$ ulimit -n 512
+> ulimit -n 512
 # とりあえず512を指定
 
-$ vagrant reload --provision
+> vagrant reload --provision
 # 適当にやりなおす
 ```
 
@@ -91,20 +96,20 @@ $ vagrant reload --provision
 
 ```
 # VMシャットダウン
-$ vagrant halt
+> vagrant halt
 
 # VM起動
-$ vagrant up
+> vagrant up
 
 # VM削除（もちろん、修正中のソース等には影響はなく、いつでも気軽に削除し、作り直せる筈である）
-$ vagrant destroy
+> vagrant destroy
 
 # 他にも
-$ vagrant suspend
-$ vagrant resume
-$ vagrant reload
-$ vagrant provision
-$ vagrant reload --provision
-$ vagrant up --provision
-$ vagrant up --no-provision
+> vagrant suspend
+> vagrant resume
+> vagrant reload
+> vagrant provision
+> vagrant reload --provision
+> vagrant up --provision
+> vagrant up --no-provision
 ```
