@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
-    <title>Sample</title>
+    <title>title</title>
     <%= javascript_include_tag 'application' %>
     <%= favicon_link_tag %>
   </head>
@@ -16,6 +16,16 @@
     <br>
     <%= session[:session_data] %><br>
     <br>
-    <%= @cache_data %>
+    <%= @cache_data %><br>
+    <br>
+    <button id="test_button">
+      タイトルテスト
+    </button>
+
+    <script>
+      $(document).on("click", "button#test_button", function() {
+        $("title").text("sample");
+      });
+    </script>
   </body>
 </html>
