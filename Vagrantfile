@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
     chef.json = {
       rbenv: {
         ruby: {
-          version: '2.3.0',
+          version: '2.3.1',
         },
       },
       git: {
