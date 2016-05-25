@@ -112,4 +112,6 @@ bundle install的なコマンドはVM上で行う
 > vagrant reload --provision
 > vagrant up --provision
 > vagrant up --no-provision
+> vagrant box list
+> vagrant box remove bento/centos-7.2 --box-version 2.2.6
 ```
