@@ -1,8 +1,10 @@
-%w[ libxml2 libxslt libxml2-devel libxslt-devel ].each do |pkg|
+%w[ libxml2 libxslt libxml2-devel libxslt-devel fontconfig-devel ].each do |pkg|
   package pkg do
     action :upgrade
   end
 end
+
+# fontconfig-devel: phantomjs用
 
 bash 'gem update bundler' do
   user   'vagrant'

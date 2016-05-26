@@ -7,6 +7,10 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/poltergeist'
 
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, phantomjs: Phantomjs.path)
+end
+
 # Specs flagged with `js: true` will use Capybara's JS driver. Set
 # that JS driver to :poltergeist
 Capybara.javascript_driver = :poltergeist

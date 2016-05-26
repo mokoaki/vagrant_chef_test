@@ -7,7 +7,6 @@
 - Ruby(rbenv) のインスコ
 - MySQL(MariaDB) のインスコ
 - Redis のインスコ
-- PhantomJS のインスコ
 - ~~Nginx のインスコ~~（開発環境にnginxなぞ要らん！という神の啓示で削除 昔のコミットにはある）
 - bundler のインスコ
 - Rails の設定

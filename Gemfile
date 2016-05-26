@@ -33,6 +33,7 @@ gem 'unicorn'
 gem 'unicorn-worker-killer'
 gem 'capybara'
 gem 'poltergeist'
+gem 'phantomjs'
 gem 'database_cleaner'
 
 # Use Capistrano for deployment

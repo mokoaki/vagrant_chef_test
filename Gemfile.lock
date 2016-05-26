@@ -90,6 +90,7 @@ GEM
     mysql2 (0.3.21)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    phantomjs (2.1.1.0)
     poltergeist (1.9.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -214,6 +215,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mysql2 (~> 0.3.20)
+  phantomjs
   poltergeist
   rails (= 4.2.6)
   redis-rails
@@ -228,4 +230,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.12.4
+   1.12.5
