@@ -1,52 +1,58 @@
-#CPUコア数と同じ説
-#CPUコア数と同じか、必要に応じて増やす説
+rails_root = File.expand_path('../../', __FILE__)
+
+# おまじない http://goo.gl/OpYJ3c
+ENV['BUNDLE_GEMFILE'] = rails_root + '/Gemfile'
+
+# CPUコア数と同じか、必要に応じて増やす説  (physicalcpu_max?)
 worker_processes 2
 
-#Nginxとプロキシ組む場合
+# 記載しておけば他のディレクトリでこのファイルを叩けなくなる 無くても大した影響はないかも
+working_directory rails_root
+
+# Nginxとプロキシ組む場合
 # listen '/vagrant/tmp/sockets/unicorn.sock'
 
-#開発時
+# 開発時
 listen 3000
 
-pid 'tmp/pids/unicorn.pid'
+# PIDの保存先
+pid File.join(rails_root, 'tmp/pids/unicorn.pid')
 
-#60秒Railsが反応しなければWorkerをkillしてタイムアウト
-timeout 60
+# xx秒Railsが反応しなければWorkerをkillしてタイムアウト
+timeout 30
 
-#ダウンタイムをなくす
+# ダウンタイムをなくす
 preload_app true
 
-#true
-#unicornの設定：再読み込みされる アプリのリロード：されない。アプリはマスタでロード済みのものを使う。アプリをリロードしたければ、SIGUSR2を送って新マスタ&workerを立ち上げる方法をとる。 ダウンタイム：発生しない（マスタのアプリをそのまま使うので、workerがあがった時から処理が可能）
+# true
+# unicornの設定：再読み込みされる アプリのリロード：されない。アプリはマスタでロード済みのものを使う。アプリをリロードしたければ、SIGUSR2を送って新マスタ&workerを立ち上げる方法をとる。 ダウンタイム：発生しない（マスタのアプリをそのまま使うので、workerがあがった時から処理が可能）
+# false
+# unicornの設定：再読み込みされる アプリのリロード：される ダウンタイム：発生する。（workerがそれぞれアプリをロードするので、ロード完了まで処理できない）
 
-#false
-#unicornの設定：再読み込みされる アプリのリロード：される ダウンタイム：発生する。（workerがそれぞれアプリをロードするので、ロード完了まで処理できない）
+stdout_path File.join(rails_root, 'log/unicorn.stdout.log')
+stderr_path File.join(rails_root, 'log/unicorn.stderr.log')
 
-stdout_path 'log/unicorn.stdout.log'
-stderr_path 'log/unicorn.stderr.log'
-
-if GC.respond_to?(:copy_on_write_friendly=)
-  GC.copy_on_write_friendly = true
-end
+# 効果なしとの情報
+# if GC.respond_to?(:copy_on_write_friendly=)
+#   GC.copy_on_write_friendly = true
+# end
 
 before_fork do |server, worker|
+  if defined?(ActiveRecord::Base)
+    ActiveRecord::Base.connection.disconnect!
+  end
+
   old_pid = "#{server.config[:pid]}.oldbin"
 
-  if File.exists?(old_pid) && server.pid != old_pid
+  if old_pid != server.pid
     begin
-      #古いマスターがいたら死んでもらう
-      Process.kill("QUIT", File.read(old_pid).to_i)
+      sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
+      Process.kill(sig, File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH
     end
   end
-
-  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
 end
 
 after_fork do |server, worker|
-  Signal.trap 'TERM' do
-    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
-  end
-
   defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
 end
