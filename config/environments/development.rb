@@ -40,11 +40,4 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.web_console.whitelisted_ips = '192.168.56.0/8'
-
-  config.cache_store = :redis_store, { host: 'localhost',
-                                       port: 6379,
-                                       db: 0,
-                                       namespace: 'cache',
-                                       expires_in: 1.days
-                                     }
 end
