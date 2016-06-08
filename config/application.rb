@@ -23,10 +23,9 @@ module Sample
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    config.cache_store = :redis_store, { host: 'localhost',
-                                         port: 6379,
+    config.cache_store = :redis_store, { path: '/var/lib/redis/redis.sock',
                                          db: 0,
-                                         namespace: 'cache',
+                                         namespace: 'vagrant_test_cache',
                                          expires_in: 1.days
                                        }
   end
