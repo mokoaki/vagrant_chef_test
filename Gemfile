@@ -44,7 +44,7 @@ group :development, :test do
   gem 'byebug'
 
   gem 'rspec-rails'
-  gem 'spring-commands-rspec', group: :developmentbundle
+  gem 'spring-commands-rspec', group: :development
 end
 
 group :development do
