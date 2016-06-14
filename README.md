@@ -48,7 +48,9 @@
 > cd /vagrant
 
 # unicorn起動
-> bundle exec rake unicorn:start
+> bin/rails s -b 0.0.0.0
+もしくは
+> bin/rake unicorn:start
 ```
 
 http://192.168.56.11:3000/ を確認しましょう
@@ -59,7 +61,7 @@ http://192.168.56.11:3000/ を確認しましょう
 
 # テストしてみたりとか(PhantomJS使ってるので、jsのテストも出来る筈)
 > cd /vagrant
-> bundle exec spring rspec spec/
+> bin/rspec spec/
 
 # VMからログアウトしてみたりとか
 > exit
@@ -69,7 +71,7 @@ http://192.168.56.11:3000/ を確認しましょう
 
 git操作はローカルで行う
 
-bundle install的なコマンドはVM上で行う
+bundle install 的なコマンドはVM上で行う
 
 #### エラーすか
 
