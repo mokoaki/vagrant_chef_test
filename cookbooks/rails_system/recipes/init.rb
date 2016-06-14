@@ -18,6 +18,18 @@ end
   end
 end
 
+bash 'remi-repo' do # epelも一緒に入る
+  user   'root'
+  group  'root'
+  cwd    '/root'
+
+  code <<-EOH
+    yum localinstall -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+  EOH
+
+  not_if { ::File.exists? "/etc/yum.repos.d/remi.repo" }
+end
+
 bash 'disable selinux enforcement' do
   code 'setenforce 0'
   not_if 'getenforce | grep Disabled'

@@ -1,13 +1,6 @@
-template '/etc/yum.repos.d/epel.repo' do
-  source 'epel.repo.erb'
-  owner 'root'
-  group 'root'
-  mode '0644'
-end
-
 package 'redis' do
   action :upgrade
-  options '--enablerepo=epel'
+  options '--enablerepo=remi'
 end
 
 service 'redis' do
