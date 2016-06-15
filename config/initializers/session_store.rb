@@ -3,6 +3,5 @@
 # Rails.application.config.session_store :cookie_store, key: '_sample_session'
 
 Rails.application.config.session_store :redis_store, servers: { path: '/tmp/redis.sock',
-                                                                db: 0,
-                                                                namespace: 'vagrant_test_session'
+                                                                namespace: "#{Rails.app_class.parent_name}_session"
                                                                }, expires_in: 1.days

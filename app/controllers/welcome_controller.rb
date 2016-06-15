@@ -8,4 +8,12 @@ class WelcomeController < ActionController::Base
       "この文字列はredisでキャッシュしたデータです。このキャッシュは10秒間だけ有効です。このキャッシュは #{Time.now} 頃に作られました"
     end
   end
+
+  def mail
+    user = User.first
+
+    UserMailer.welcome_email(user).deliver_later(wait: 10.seconds)
+
+    render text: true
+  end
 end

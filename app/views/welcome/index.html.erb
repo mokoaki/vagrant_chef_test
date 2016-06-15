@@ -18,13 +18,24 @@
     <br>
     <%= @cache_data %><br>
     <br>
+
     <button id="test_button">
       タイトルテスト
+    </button>
+
+    <br>
+
+    <button id="mail_button">
+      メールテスト 押したら10秒後にメール送信
     </button>
 
     <script>
       $(document).on("click", "button#test_button", function() {
         $("title").text("sample");
+      });
+
+      $(document).on("click", "button#mail_button", function() {
+        $.get("/mail");
       });
     </script>
   </body>

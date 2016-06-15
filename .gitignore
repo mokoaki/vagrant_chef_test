@@ -1,4 +1,6 @@
+.DS_Store
 /.vagrant/
 /tmp/
 /log/*.log
 /vendor/
+config/secrets.yml
