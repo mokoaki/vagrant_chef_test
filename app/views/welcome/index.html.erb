@@ -18,6 +18,11 @@
     <br>
     <%= @cache_data %><br>
     <br>
+    <% cache(@user) do %>
+      これはフラグメントキャッシュです userが更新されるまで、もしくはキャッシュの有効期限まで有効です。このセッションは <%= Time.zone.now %> 頃に作られました<br>
+    <% end %>
+
+    <hr>
 
     <button id="test_button">
       タイトルテスト

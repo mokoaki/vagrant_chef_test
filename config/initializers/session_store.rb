@@ -4,4 +4,4 @@
 
 Rails.application.config.session_store :redis_store, servers: { path: '/tmp/redis.sock',
                                                                 namespace: "#{Rails.app_class.parent_name}_session"
-                                                               }, expires_in: 1.days
+                                                              }, expires_in: 1.days

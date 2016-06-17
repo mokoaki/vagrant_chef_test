@@ -1,6 +1,6 @@
 Rails.application.config.active_job.queue_adapter = :sidekiq
 
-# 全てのsidekiqのキュー名のprefix
+# 全ての active_job のキュー名の prefix
 module Sample
   class Application < Rails::Application
     config.active_job.queue_name_prefix = Rails.app_class.parent_name
