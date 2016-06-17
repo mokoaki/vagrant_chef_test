@@ -54,7 +54,7 @@ $ bundle exec sidekiq -C config/sidekiq.yml
 $ vagrant ssh
 $ cd /vagrant
 
-# unicorn起動
+# アプリ起動
 $ bin/rails s -b 0.0.0.0
 もしくは
 $ bin/rake unicorn:start
