@@ -54,6 +54,9 @@ $ bundle exec sidekiq -C config/sidekiq.yml
 $ vagrant ssh
 $ cd /vagrant
 
+# dev環境、キャッシュの有効化（再度実行で無効化）
+$ bin/rails dev:cache
+
 # アプリ起動
 $ bin/rails s -b 0.0.0.0
 もしくは
@@ -80,7 +83,7 @@ git操作はローカルで行う
 
 bundle install 的なコマンドはVM上で行う
 
-#### エラーすか
+### エラーすか
 
 `Too many open files - getcwd (Errno::EMFILE)`
 

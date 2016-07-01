@@ -1,47 +1,35 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <title>title</title>
-    <%= javascript_include_tag 'application' %>
-    <%= favicon_link_tag %>
-  </head>
+このページは、さっき作ったVM内で動いているRailsで生成された画面です　やったね<br>
+<br>
+ブラウザ ← unicorn ← Rails ← (MariaDB, Redis)<br>
+<br>
+<%= @user[:name] %><br>
+<br>
+<%= session[:session_data] %><br>
+<br>
+<%= @cache_data %><br>
+<br>
+<% cache(@user) do %>
+  これはフラグメントキャッシュです。Redis内に保存されています。このキャッシュは24時間、もしくはuserが更新されるまで有効です。このキャッシュは <%= Time.zone.now %> 頃に作られました<br>
+<% end %>
 
-  <body>
-    このページは、さっき作ったVM内で動いているRailsで生成された画面です　やったね<br>
-    <br>
-    ブラウザ ← unicorn ← Rails ← (MariaDB, Redis)<br>
-    <br>
-    <%= @user[:name] %><br>
-    <br>
-    <%= session[:session_data] %><br>
-    <br>
-    <%= @cache_data %><br>
-    <br>
-    <% cache(@user) do %>
-      これはフラグメントキャッシュです。Redis内に保存されています。このキャッシュは24時間、もしくはuserが更新されるまで有効です。このキャッシュは <%= Time.zone.now %> 頃に作られました<br>
-    <% end %>
+<hr>
 
-    <hr>
+<button id="test_button">
+  タイトルテスト
+</button>
 
-    <button id="test_button">
-      タイトルテスト
-    </button>
+<br>
 
-    <br>
+<button id="mail_button">
+  メールテスト 押したら10秒後にメール送信
+</button>
 
-    <button id="mail_button">
-      メールテスト 押したら10秒後にメール送信
-    </button>
+<script>
+  $(document).on("click", "button#test_button", function() {
+    $("title").text("sample");
+  });
 
-    <script>
-      $(document).on("click", "button#test_button", function() {
-        $("title").text("sample");
-      });
-
-      $(document).on("click", "button#mail_button", function() {
-        $.get("/mail");
-      });
-    </script>
-  </body>
-</html>
+  $(document).on("click", "button#mail_button", function() {
+    $.get("/mail");
+  });
+</script>

@@ -15,5 +15,5 @@ oom_max = (ENV['OOM_MAX'] || 256).to_i * (1024 ** 2)
 # Max memory size (RSS) per worker
 use Unicorn::WorkerKiller::Oom, oom_min, oom_max, check_cycle, verbose_flg
 
-require ::File.expand_path('../config/environment', __FILE__)
+require_relative 'config/environment'
 run Rails.application

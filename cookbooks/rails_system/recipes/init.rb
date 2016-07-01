@@ -1,5 +1,7 @@
-package 'yum-fastestmirror' do
-  action :upgrade
+%w[ yum-fastestmirror ].each do |pkg|
+  package pkg do
+    action :upgrade
+  end
 end
 
 bash 'yum upgrade -y' do
