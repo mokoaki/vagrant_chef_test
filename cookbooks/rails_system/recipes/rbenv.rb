@@ -1,6 +1,6 @@
 target_version = node['rbenv']['ruby']['version']
 
-%w[ gcc openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel ].each do |pkg|
+%w[ gcc bzip2 openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel ].each do |pkg|
   package pkg do
     action :upgrade
   end
@@ -52,13 +52,13 @@ bash "rbenv install #{target_version}" do
   not_if { ::File.exists? "/home/vagrant/.rbenv/versions/#{target_version}/" }
 end
 
-bash 'gem update --system' do
+bash 'gem update --system --no-document' do
   user   'vagrant'
   group  'vagrant'
   cwd    '/home/vagrant'
 
   code <<-EOH
     source /etc/profile.d/rbenv.sh
-    gem update --system
+    rbenv exec gem update --system --no-document
   EOH
 end

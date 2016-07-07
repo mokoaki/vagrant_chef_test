@@ -1,10 +1,9 @@
-%w[ libxml2 libxslt libxml2-devel libxslt-devel fontconfig-devel ].each do |pkg|
+# fontconfig-devel: phantomjs用
+%w[ fontconfig-devel ].each do |pkg|
   package pkg do
     action :upgrade
   end
 end
-
-# fontconfig-devel: phantomjs用
 
 bash 'gem update bundler' do
   user   'vagrant'
@@ -52,8 +51,8 @@ bash 'rails db init' do
 
   code <<-EOH
     source /etc/profile.d/rbenv.sh
-    bundle exec rake db:create
-    bundle exec rake db:migrate
-    bundle exec rake db:seed
+    bin/rails db:create
+    bin/rails db:migrate
+    bin/rails db:seed
   EOH
 end
