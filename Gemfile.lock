@@ -1,11 +1,11 @@
 GIT
   remote: git://github.com/redis-store/redis-rails.git
-  revision: f05ac2a5503a894bc189b569c4a5598e7d9af51d
+  revision: bcecc6c2f95cb1243b3d4573d76f36ddba05fc65
   specs:
-    redis-rails (5.0.0.pre)
-      redis-actionpack (~> 5.0.0.pre)
-      redis-activesupport (~> 5.0.0.pre)
-      redis-store (~> 1.2.0.pre)
+    redis-rails (5.0.1)
+      redis-actionpack (~> 5.0.0)
+      redis-activesupport (~> 5.0.0)
+      redis-store (~> 1.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -73,7 +73,7 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.7.0)
-    ffi (1.9.10)
+    ffi (1.9.14)
     get_process_mem (0.2.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -145,20 +145,20 @@ GEM
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
     redis (3.3.0)
-    redis-actionpack (5.0.0.pre)
+    redis-actionpack (5.0.0)
       actionpack (>= 4.0.0, < 6)
       redis-rack (~> 2.0.0.pre)
       redis-store (~> 1.2.0.pre)
-    redis-activesupport (5.0.0.pre)
+    redis-activesupport (5.0.1)
       activesupport (>= 3, < 6)
-      redis-store (~> 1.2.0.pre)
+      redis-store (~> 1.2.0)
     redis-rack (2.0.0.pre)
       rack (> 1.5, < 3)
       redis-store (~> 1.2.0.pre)
-    redis-store (1.2.0.pre)
+    redis-store (1.2.0)
       redis (>= 2.2)
     ref (2.0.0)
-    rspec-core (3.5.0)
+    rspec-core (3.5.1)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -166,7 +166,7 @@ GEM
     rspec-mocks (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
-    rspec-rails (3.5.0)
+    rspec-rails (3.5.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
