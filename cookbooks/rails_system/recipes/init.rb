@@ -77,11 +77,5 @@ bash 'git setting' do
   code <<-EOH
     su vagrant -l -c 'git config --global user.name "#{node['git']['setting']['user']}"'
     su vagrant -l -c 'git config --global user.email "#{node['git']['setting']['email']}"'
-    su vagrant -l -c 'git config --global color.ui true'
-    su vagrant -l -c 'git config --global alias.s "status"'
-    su vagrant -l -c 'git config --global alias.c "checkout"'
-    su vagrant -l -c 'git config --global alias.b "branch"'
-    su vagrant -l -c 'git config --global alias.d "diff"'
-    su vagrant -l -c 'git config --global alias.l "log --name-status -3"'
   EOH
 end
