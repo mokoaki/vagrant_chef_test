@@ -13,7 +13,6 @@ bash 'gem update bundler' do
   code <<-EOH
     source /etc/profile.d/rbenv.sh
     rbenv exec gem update bundler --no-document
-    rbenv rehash
   EOH
 
   only_if 'source /etc/profile.d/rbenv.sh; gem list | grep bundler'
@@ -27,7 +26,6 @@ bash 'gem install bundler' do
   code <<-EOH
     source /etc/profile.d/rbenv.sh
     rbenv exec gem install bundler --no-document
-    rbenv rehash
   EOH
 
   not_if 'source /etc/profile.d/rbenv.sh; gem list | grep bundler'
