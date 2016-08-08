@@ -61,3 +61,29 @@ bash 'gem update --system --no-document' do
     rbenv exec gem update --system --no-document
   EOH
 end
+
+bash 'gem update bundler' do
+  user   'vagrant'
+  group  'vagrant'
+  cwd    '/home/vagrant'
+
+  code <<-EOH
+    source /etc/profile.d/rbenv.sh
+    rbenv exec gem update bundler --no-document
+  EOH
+
+  only_if 'source /etc/profile.d/rbenv.sh; gem list | grep bundler'
+end
+
+bash 'gem install bundler' do
+  user   'vagrant'
+  group  'vagrant'
+  cwd    '/home/vagrant'
+
+  code <<-EOH
+    source /etc/profile.d/rbenv.sh
+    rbenv exec gem install bundler --no-document
+  EOH
+
+  not_if 'source /etc/profile.d/rbenv.sh; gem list | grep bundler'
+end
