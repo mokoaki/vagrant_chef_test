@@ -2,11 +2,11 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box      = 'bento/centos-7.2'
-  config.vm.hostname = 'vagrant-chef-rails-test-vm'
+  config.vm.hostname    = 'vagrant-chef-rails-test-vm'
+  config.vm.box         = 'bento/centos-7.2'
+  config.vm.box_version = '2.2.9'
 
-  # config.omnibus.chef_version = :latest # が調子悪いようなので、一旦固定して様子を見る
-  config.omnibus.chef_version = '12.10.24'
+  config.omnibus.chef_version = :latest
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = './cookbooks'
