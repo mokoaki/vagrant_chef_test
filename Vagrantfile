@@ -4,7 +4,6 @@
 Vagrant.configure(2) do |config|
   config.vm.hostname    = 'vagrant-chef-rails-test-vm'
   config.vm.box         = 'bento/centos-7.2'
-  config.vm.box_version = '2.2.9'
 
   config.omnibus.chef_version = :latest
 
