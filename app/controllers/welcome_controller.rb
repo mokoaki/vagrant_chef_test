@@ -14,6 +14,6 @@ class WelcomeController < ApplicationController
 
     UserMailer.welcome_email(user).deliver_later(wait: 10.seconds)
 
-    render text: true
+    render plain: ''
   end
 end
