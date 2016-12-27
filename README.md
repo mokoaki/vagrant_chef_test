@@ -14,8 +14,8 @@
 - Rails の設定
 
 #### 先立ってローカルにインスコしておく必要があるもの
-- VirtualBox https://www.virtualbox.org/wiki/Downloads
-- Vagrant https://www.vagrantup.com/downloads.html
+- VirtualBox https://www.virtualbox.org/wiki/Downloads （確認済ver 5.1.12 r112440 (Qt5.6.2)）
+- Vagrant https://www.vagrantup.com/downloads.html （確認済Ver 1.8.6）
 - git
 
 #### TODO
